@@ -1,0 +1,11 @@
+{
+  "name": "@allocatepp/types",
+  "version": "0.0.0",
+  "types": ".src/domain.d.ts",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@googleapis/calendar": "^2.0.0",
+    "typescript": "^4.8.2"
+  }
+}

@@ -9,18 +9,23 @@ import { AppContext } from '../contexts/AppContext';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import tw, { styled as twinStyled } from 'twin.macro';
 
-const TasksContainer = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border-radius: 15px;
-  background: ${({ theme }) => theme.palette.secondary.light};
-  border-color: black;
-  width: 350px;
-  min-height: 650px;
-  padding: 18px;
-`;
+const TasksContainer = twinStyled(
+  styled('div')`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 15px;
+    background: ${({ theme }) => theme.palette.background.paper};
+    border-color: black;
+    width: 350px;
+    padding: 10px;
+  `,
+  {
+    ...tw`shadow-md`,
+  },
+);
 
 const TaskTitle = styled(Typography)`
   font-weight: bolder;
@@ -33,6 +38,8 @@ const StyledList = styled(List)`
 `;
 
 const StyledListItem = styled(ListItem)`
+  display: flex;
+  flex-direction: column;
   padding-top: 8px;
 `;
 
@@ -43,11 +50,17 @@ const ExecuteButton = styled(Button)`
   border-radius: 0px 0px 5px 5px;
 `;
 
+const TaskWrapper = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 const TaskContainer = styled('div')`
   display: flex;
   flex-direction: row;
-  width: 100%;
-  background: #e2d9f2;
+  width: 95%;
+  background: ${({ theme }) => theme.palette.background.default};
   border-radius: 15px;
   padding: 19px;
   margin-top: 10px;
@@ -62,6 +75,7 @@ const Tasks: React.FC = () => {
 
   const { createdTasks, setCreatedTasks } = useContext(AppContext);
 
+  const [courseCode, setCourseCode] = useState('');
   const [taskDescription, setTaskDescription] = useState<string>('');
   const [taskDate, setTaskDate] = useState<Date>(new Date());
 
@@ -80,6 +94,7 @@ const Tasks: React.FC = () => {
   const doCreateTask = () => {
 
     const newTask: Task = {
+      course: courseCode === '' ? 'N/A' : courseCode,
       description: taskDescription,
       dueDate: taskDate,
     }
@@ -90,6 +105,7 @@ const Tasks: React.FC = () => {
 
     console.log(createdTasks);
     
+    setCourseCode('');
     setTaskDescription('');
     setTaskDate(new Date());
 
@@ -119,7 +135,18 @@ const Tasks: React.FC = () => {
         <StyledList>
           <StyledListItem>
             <ListItemIcon>
-              {/* <StickyNote2Icon sx={{ marginTop: '15px', marginRight: '20px', width: '28px', height: '28px' }}/> */}
+              <TextField
+                id="outlined-required"
+                label="Enter course code"
+                onChange={(e) => setCourseCode(e.target.value)}
+                variant="outlined"
+                fullWidth
+                defaultValue={courseCode}
+                inputProps={{ maxLength: 10 }}
+                sx={{ width: '234px', marginBottom: '15px' }}
+              />
+            </ListItemIcon>
+            <ListItemIcon>
               <TextField
                 id="outlined-required"
                 label="Enter task description"
@@ -128,6 +155,7 @@ const Tasks: React.FC = () => {
                 fullWidth
                 required
                 defaultValue={taskDescription}
+                inputProps={{ maxLength: 25 }}
                 sx={{ width: '234px' }}
               />
             </ListItemIcon>
@@ -157,16 +185,19 @@ const Tasks: React.FC = () => {
       </Popover>
       </div>
       <Divider />
-      { createdTasks.map((task: Task, index: number) => {
-        return (
-          <TaskContainer key={index}>
-            <TaskDetails>
-              <Typography variant='body1'>{task.description}</Typography>
-              <Typography variant='body1'>{task.dueDate.toLocaleDateString()}</Typography>
-            </TaskDetails>
-          </TaskContainer>
-        )
-      })}
+      <TaskWrapper>
+        { createdTasks.map((task: Task, index: number) => {
+          return (
+            <TaskContainer key={index}>
+              <TaskDetails>
+                <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Course:</b> {task.course}</Typography>
+                <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Task:</b> {task.description}</Typography>
+                <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Due date:</b> {task.dueDate.toLocaleDateString()}</Typography>
+              </TaskDetails>
+            </TaskContainer>
+          )
+        })}
+      </TaskWrapper>
     </TasksContainer>
   );
 };
