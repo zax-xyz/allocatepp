@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "yarn workspace frontend run dev"
+    "dev": "yarn workspace @allocatepp/app run dev"
   },
   "workspaces": [
     "apps/*",
