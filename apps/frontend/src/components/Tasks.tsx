@@ -3,8 +3,9 @@ import { styled } from '@mui/system';
 import { Button, Checkbox, Divider, IconButton, List, ListItem, ListItemIcon, Popover, TextField, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Add } from '@mui/icons-material';
-import { Task } from '../interfaces/types';
+import { CreatedTasks, Task } from '../interfaces/types';
 import { AppContext } from '../contexts/AppContext';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -31,6 +32,18 @@ const TaskTitle = styled(Typography)`
   font-weight: bolder;
   margin: 10px;
   margin-right: auto;
+`;
+
+const TaskDiv = styled('div')`
+  display: flex;
+  flex-direction: row;
+  gap: 70px;
+  margin-left: auto; 
+  margin-right: 0;
+`;
+
+const StyledDeleteIcon = styled(DeleteIcon)`
+  margin-left: 0;
 `;
 
 const StyledList = styled(List)`
@@ -91,9 +104,14 @@ const Tasks: React.FC = () => {
     setAnchorEl(null);
   };
 
+  const deleteTask = (index: number) => {
+    setCreatedTasks((oldTasks: CreatedTasks): CreatedTasks => oldTasks.filter(oldTask => {return oldTask.index !== index}))
+  }
+
   const doCreateTask = () => {
 
     const newTask: Task = {
+      index: createdTasks.length === 0 ? 0 : createdTasks[createdTasks.length - 1].index + 1,
       course: courseCode === '' ? 'N/A' : courseCode,
       description: taskDescription,
       dueDate: taskDate,
@@ -182,14 +200,17 @@ const Tasks: React.FC = () => {
       </div>
       <Divider />
       <TaskWrapper>
-        { createdTasks.map((task: Task, index: number) => {
+        { createdTasks.map((task: Task) => {
           return (
-            <TaskContainer key={index}>
-              <TaskDetails>
-                <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Course:</b> {task.course}</Typography>
-                <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Task:</b> {task.description}</Typography>
-                <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Due date:</b> {task.dueDate.toLocaleDateString()}</Typography>
-              </TaskDetails>
+            <TaskContainer key={task.index}>
+              <TaskDiv>
+                <TaskDetails>
+                  <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Course:</b> {task.course}</Typography>
+                  <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Task:</b> {task.description}</Typography>
+                  <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Due date:</b> {task.dueDate.toLocaleDateString()}</Typography>
+                </TaskDetails>
+                <StyledDeleteIcon onClick={() => deleteTask(task.index)} />
+              </TaskDiv>
             </TaskContainer>
           )
         })}
