@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { styled } from '@mui/system';
-import { Button, Checkbox, Divider, IconButton, List, ListItem, ListItemIcon, Popover, TextField, Typography } from '@mui/material';
+import { Button, Checkbox, Divider, IconButton, List, ListItem, ListItemIcon, Popover, TextField, Tooltip, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -37,7 +37,9 @@ const TaskTitle = styled(Typography)`
 const TaskDiv = styled('div')`
   display: flex;
   flex-direction: row;
-  gap: 70px;
+`;
+
+const DeleteDiv = styled('div')`
   margin-left: auto; 
   margin-right: 0;
 `;
@@ -82,6 +84,7 @@ const TaskContainer = styled('div')`
 const TaskDetails = styled('div')`
   display: flex;
   flex-direction: column;
+  width: 250px;
 `
 
 const Tasks: React.FC = () => {
@@ -209,7 +212,14 @@ const Tasks: React.FC = () => {
                   <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Task:</b> {task.description}</Typography>
                   <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Due date:</b> {task.dueDate.toLocaleDateString()}</Typography>
                 </TaskDetails>
-                <StyledDeleteIcon onClick={() => deleteTask(task.index)} />
+                <Tooltip title="Delete">
+                  <IconButton
+                    color="inherit"
+                    sx={{ width: '30px', height: '30px' }}
+                  >
+                    <StyledDeleteIcon onClick={() => deleteTask(task.index)} />
+                  </IconButton>
+                </Tooltip>
               </TaskDiv>
             </TaskContainer>
           )
