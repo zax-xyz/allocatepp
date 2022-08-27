@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
           }}
         >
           <Typography color="text.secondary" variant="body2">
-            © {year} SYNCS Hack - Angella Pham, Grace Kan, Maxwell Phillips, Michael Vo, Mun Jun Teo
+            © {year} SYNCS Hack - Angella Pham, Grace Kan, Maxwell Phillips, Michael Vo, Mun Joon Teo
             and Raiyan Ahmed
           </Typography>
           <Stack direction="row" spacing={3}>

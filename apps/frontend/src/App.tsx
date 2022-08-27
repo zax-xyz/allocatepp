@@ -1,18 +1,14 @@
-import { useEffect, useContext } from 'react';
+import { useState } from 'react';
 import { styled } from '@mui/system';
-import { Box, GlobalStyles, StyledEngineProvider, ThemeProvider } from '@mui/material';
-import { AppContext } from './contexts/AppContext';
-import storage from './storage';
+import { Box, GlobalStyles, ThemeProvider, useTheme } from '@mui/material';
 
 import { lightTheme, darkTheme } from './constants/theme';
 import 'twin.macro';
 
 import Navbar from './components/Navbar';
-import Tab from './components/Tabs/Tab';
 import TasksWidget from './components/Tasks';
 import Footer from './components/Footer';
 import Widgets from './components/Widgets';
-import Tabs from './components/Tabs/Tabs';
 
 const StyledApp = styled(Box)`
   height: 100%;
@@ -54,13 +50,10 @@ const TimetableWrapper = styled(Box)`
 `;
 
 const App: React.FC = () => {
-  const { isDarkMode } = useContext(AppContext);
+  const theme = useTheme();
+  const [darkMode, setDarkMode] = useState(false);
 
-  useEffect(() => {
-    storage.set('isDarkMode', isDarkMode);
-  }, [isDarkMode]);
 
-  const theme = isDarkMode ? darkTheme : lightTheme;
   const globalStyle = {
     body: {
       background: theme.palette.background.default,
@@ -84,22 +77,18 @@ const App: React.FC = () => {
       background: theme.palette.secondary.dark,
     },
   };
+  
 
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
         <GlobalStyles styles={globalStyle} />
         <StyledApp>
           <StyledBox>
-            <Navbar />
+            <Navbar handleToggleDarkMode={() => setDarkMode(!darkMode)} />
             <ContentWrapper>
               <Content>
-                {/* <Toolbar /> */}
                 <TimetableWrapper>
                   <TasksWidget />
-                  {/*<Timetable />*/}
-                  <Tab tabName={'test'} />
-                  <Tabs />
                   <Widgets />
                 </TimetableWrapper>
               </Content>
@@ -108,7 +97,6 @@ const App: React.FC = () => {
           </StyledBox>
         </StyledApp>
       </ThemeProvider>
-    </StyledEngineProvider>
   );
 };
 
