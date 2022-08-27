@@ -19,7 +19,11 @@ const TabsBox = styled('div')`
   flex-direction: row;
 `;
 
-const TabContainer = styled('div')`
+const TabContainer = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'tabColour',
+}) < {
+  tabColour: string;
+}>`
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -28,6 +32,7 @@ const TabContainer = styled('div')`
   padding: 1px 5px 3px 10px;
   width: fit-content;
   height: fit-content;
+  background-color: ${({ tabColour }) => tabColour};
 `;
 
 const StyledCloseIcon = styled(Close)`
@@ -35,9 +40,10 @@ const StyledCloseIcon = styled(Close)`
   margin-top: 5px;
 `;
 
-const NewTab: React.FC<{ tabName: string, tabId: number, closeTab: any }> = ({ tabName, tabId, closeTab }) => {
+const NewTab: React.FC<{ tabName: string, tabId: number, closeTab: any, currentTabId: number, setCurrentTabId: any }> = ({ tabName, tabId, closeTab, currentTabId , setCurrentTabId}) => {
+  console.log(currentTabId)
   return (
-    <TabContainer>
+    <TabContainer tabColour={tabId === currentTabId ? "#12345" : "#12345" } onClick={() => setCurrentTabId(tabId)} >
       <p>{tabName}</p>
       <StyledCloseIcon onClick={() => closeTab(tabId)} />
     </TabContainer>
@@ -61,7 +67,7 @@ const AllTabs: React.FC = () => {
   const findCurrentTab = () => {
     return tabs.find(tab => {
         return tab.id === currentTabId
-    }) || tabs[0]
+    }) || tabs[tabs.length - 1]
   }
 
   const addTab = () => {
@@ -92,7 +98,7 @@ const AllTabs: React.FC = () => {
   return (
     <div>
       <TabsBox>
-        {tabs.map(currTab => <NewTab tabName={"Timetable" + currTab.id} tabId={currTab.id} closeTab={closeTab} />)}
+        {tabs.map(currTab => <NewTab tabName={"Timetable" + currTab.id} tabId={currTab.id} closeTab={closeTab} currentTabId={findCurrentTab().id} setCurrentTabId={setCurrentTabId} />)}
         <PlusTab addTab={addTab} />
       </TabsBox>
       <Timetable currTab={findCurrentTab()} />

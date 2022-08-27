@@ -8,7 +8,6 @@ const TimetableContainer = styled('div')`
 `;
 
 const Timetable: React.FC<{ currTab: Tab }> = ({ currTab }) => {
-  console.log(currTab.timetable)
   return (
     <TimetableContainer>
       hello
