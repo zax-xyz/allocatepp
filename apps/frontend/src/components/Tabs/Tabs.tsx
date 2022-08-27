@@ -32,6 +32,7 @@ const TabContainer = styled('div', {
   padding: 1px 5px 3px 10px;
   width: fit-content;
   height: fit-content;
+  border-radius: 5px 5px 0 0;
   background-color: ${({ tabColour }) => tabColour};
   colour: green;
 `;
