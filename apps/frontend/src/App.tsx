@@ -8,7 +8,7 @@ import { lightTheme, darkTheme } from './constants/theme';
 import 'twin.macro';
 
 import Navbar from './components/Navbar';
-import Tab from './components/Tabs/Tab';
+import Tab from './components/Tabs/Tabs';
 import TasksWidget from './components/Tasks';
 import Footer from './components/Footer';
 import Widgets from './components/Widgets';
@@ -98,7 +98,6 @@ const App: React.FC = () => {
                 <TimetableWrapper>
                   <TasksWidget />
                   {/*<Timetable />*/}
-                  <Tab tabName={'test'} />
                   <Tabs />
                   <Widgets />
                 </TimetableWrapper>
