@@ -99,12 +99,8 @@ const Tasks: React.FC = () => {
       dueDate: taskDate,
     }
 
-    createdTasks.push(newTask);
+    setCreatedTasks([...createdTasks, newTask]);
 
-    setCreatedTasks(createdTasks);
-
-    console.log(createdTasks);
-    
     setCourseCode('');
     setTaskDescription('');
     setTaskDate(new Date());

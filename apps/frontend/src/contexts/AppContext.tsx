@@ -33,7 +33,7 @@ export const AppContext = createContext<IAppContext>({
 const AppContextProvider = ({ children }: AppContextProviderProps) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(storage.get('isDarkMode'));
   const [isSendNotification, setIsSendNotification] = useState<boolean>(storage.get('isSendNotification'));
-  const [createdTasks, setCreatedTasks] = useState<CreatedTasks>([]);
+  const [createdTasks, setCreatedTasks] = useState<CreatedTasks>(storage.get('createdTasks'));
 
   const initialContext: IAppContext = {
     isDarkMode,
