@@ -45,7 +45,7 @@ const Navbar: React.FC<Props> = ({ handleToggleDarkMode }) => {
     <NavbarBox>
       <StyledNavBar>
         <Toolbar sx={{ gap: '10px' }}>
-          <div tw="mx-auto max-w-[100rem] flex flex-1 items-center">
+          <div tw="mx-auto max-w-[90rem] flex flex-1 items-center">
             <LogoImg src={logo} sx={{ marginRight: '0px' }} />
             <NavbarTitle>ALLOCATE++</NavbarTitle>
             <IconButton onClick={handleToggleDarkMode} color="inherit">
