@@ -4,6 +4,8 @@ import { Box, GlobalStyles, ThemeProvider, useTheme } from '@mui/material';
 
 import { lightTheme, darkTheme } from './constants/theme';
 import 'twin.macro';
+import { Course } from '../types/domain';
+import { TimetableProvider } from './hooks/useTimetable';
 
 import Navbar from './components/Navbar';
 import TasksWidget from './components/Tasks';
@@ -53,6 +55,8 @@ const App: React.FC = () => {
   const theme = useTheme();
   const [darkMode, setDarkMode] = useState(false);
 
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [timetable, setTimetable] = useState(null);
 
   const globalStyle = {
     body: {
@@ -77,9 +81,9 @@ const App: React.FC = () => {
       background: theme.palette.secondary.dark,
     },
   };
-  
 
   return (
+    <TimetableProvider value={timetable}>
       <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
         <GlobalStyles styles={globalStyle} />
         <StyledApp>
@@ -97,6 +101,7 @@ const App: React.FC = () => {
           </StyledBox>
         </StyledApp>
       </ThemeProvider>
+    </TimetableProvider>
   );
 };
 

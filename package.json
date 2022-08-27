@@ -5,7 +5,15 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "yarn workspace @allocatepp/app run dev"
+  },
   "workspaces": [
-    "apps/*"
-  ]
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.2"
+  }
 }
