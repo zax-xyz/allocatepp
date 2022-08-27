@@ -1,10 +1,12 @@
-import * as mongoDB from 'mongodb'
+import * as mongoDB from 'mongodb';
+import dotenv from 'dotenv';
 
-const url = 'mongodb+srv://csesoc:syncs@cluster0.3ih5idr.mongodb.net/?retryWrites=true&w=majority';
+const url = dotenv.config().parsed?.MONGO_URL;
 
-export const db: {courses?: mongoDB.Db, coursesList: string[]} = {coursesList: []}
+export const db: { courses?: mongoDB.Db; coursesList: string[] } = { coursesList: [] };
 
 export const connectToDB = async () => {
+  if (url) {
     const client = new mongoDB.MongoClient(url);
     await client.connect();
 
@@ -13,5 +15,8 @@ export const connectToDB = async () => {
 
     const coursesList = await courses.listCollections().toArray();
     db.coursesList = coursesList.map((x: any) => x.name);
-    console.log('Connected to database')
-}
+    console.log('Connected to database');
+  } else {
+    throw new Error('No url provided');
+  }
+};

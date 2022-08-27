@@ -5,6 +5,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { AppBar, IconButton, Toolbar, Typography, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { useContext } from 'react';
+import tw, { styled as twinStyled } from 'twin.macro';
 import { AppContext } from '../contexts/AppContext';
 import logo from '../assets/logo.png';
 
@@ -15,11 +16,16 @@ const NavbarBox = styled('div')`
   z-index: 1201;
 `;
 
-const StyledNavBar = styled(AppBar)`
-  gap: 40px;
-  background: linear-gradient(220deg, #f0ddf5, #dde7f5);
-  z-index: 1201;
-`;
+const StyledNavBar = twinStyled(
+  styled(AppBar)`
+    gap: 40px;
+    background: linear-gradient(220deg, #f0ddf5, #dde7f5);
+    z-index: 1201;
+  `,
+  {
+    ...tw`shadow-md!`,
+  },
+);
 
 const NavbarTitle = styled(Typography)`
   flex-grow: 1;
@@ -31,30 +37,30 @@ const LogoImg = styled('img')`
   height: 46px;
   margin-right: 12.5px;
   margin-top: -2px;
-  margin-left: -11.5px;
 `;
 
 interface Props {
   handleToggleDarkMode: () => void;
 }
 
-const Navbar: React.FC<Props> = ({ handleToggleDarkMode}) => {
-
+const Navbar: React.FC<Props> = ({ handleToggleDarkMode }) => {
   const theme = useTheme();
 
   return (
     <NavbarBox>
       <StyledNavBar>
         <Toolbar sx={{ gap: '10px' }}>
-          <LogoImg src={logo} sx={{ marginRight: '0px' }}/>
-          <NavbarTitle>ALLOCATE++</NavbarTitle>
-          <IconButton onClick={handleToggleDarkMode} color="inherit">
-            {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
-          {/* TODO: Notifications */}
-          {/* <IconButton onClick={() => setIsSendNotification(!isSendNotification)} color="inherit">
+          <div tw="mx-auto max-w-[90rem] flex flex-1 items-center">
+            <LogoImg src={logo} sx={{ marginRight: '0px' }} />
+            <NavbarTitle>ALLOCATE++</NavbarTitle>
+            <IconButton onClick={handleToggleDarkMode} color="inherit">
+              {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+            </IconButton>
+            {/* TODO: Notifications */}
+            {/* <IconButton onClick={() => setIsSendNotification(!isSendNotification)} color="inherit">
             {isSendNotification ? <NotificationsIcon /> : <NotificationsActiveIcon />}
           </IconButton> */}
+          </div>
         </Toolbar>
       </StyledNavBar>
     </NavbarBox>

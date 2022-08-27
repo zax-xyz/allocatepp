@@ -17,7 +17,6 @@ const BarContainer = tw.div`
   cursor-default overflow-hidden
   focus:outline-none
   focus-visible:(ring-2 ring-white ring-opacity-75 ring-offset-2 ring-offset-teal-300)
-  sm:text-sm
 `;
 
 const OptionItem = styled.li({
@@ -79,7 +78,7 @@ const SearchBar = () => {
         <div tw="relative mt-1">
           <BarContainer>
             <Combobox.Input
-              tw="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+              tw="w-full border-none py-2 pl-3 pr-10 leading-5 text-gray-900 focus:ring-0"
               displayValue={(entry: Entry) => entry.course_code}
               onChange={event => setQuery(event.target.value)}
             />
