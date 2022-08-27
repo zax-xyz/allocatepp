@@ -13,8 +13,20 @@
     "@heroicons/react": "^2.0.8",
     "@stitches/react": "^1.2.8",
     "algoliasearch": "^4.14.2",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@fontsource/montserrat": "^4.5.12",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.10.2",
+    "@mui/material": "^5.10.2",
+    "@reduxjs/toolkit": "^1.8.5",
+    "antd": "^4.22.8",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-beautiful-dnd": "^13.1.0",
+    "react-dom": "^18.0.0",
+    "react-mde": "^11.5.0",
+    "react-redux": "^8.0.2",
+    "react-split": "^2.0.14"
   },
   "devDependencies": {
     "@allocatepp/types": "*",
