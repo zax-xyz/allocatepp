@@ -1,6 +1,8 @@
 
 import express, {Request, Response} from 'express';
 import mongoose from 'mongoose';
+
+
 const app = express();
 
 mongoose.connect('mongodb+srv://csesoc:syncs@cluster0.3ih5idr.mongodb.net/?retryWrites=true&w=majority'
@@ -10,7 +12,15 @@ mongoose.connect('mongodb+srv://csesoc:syncs@cluster0.3ih5idr.mongodb.net/?retry
   }).catch(err => console.log('err', err))
 
 
+/**
+ * Routes
+ */
+
 app.get("/course/:id", (req: Request, res: Response) => { 
   const courseId = req.params.id;
   return res.send("amongus code for " + courseId);
+})
+
+app.get("/courses/", (req: Request, res: Response) => { 
+  
 })
