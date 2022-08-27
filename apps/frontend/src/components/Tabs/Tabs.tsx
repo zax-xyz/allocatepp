@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-import { Close } from '@mui/icons-material';
+import { Close, ClosedCaptionDisabled } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import AddIcon from '@mui/icons-material/Add';
+import { Tab, Tabs } from '../../../types/domain';
+import Timetable from '../Timetable';
 
 const AddIconBox = styled('div')`
   padding: 0px 5px;
@@ -33,26 +35,16 @@ const StyledCloseIcon = styled(Close)`
   margin-top: 5px;
 `;
 
-/*
-const findTab = (tabs) => {
-
-}
-
-const deleteTab = (tabs, tab) => {
-
-}
-*/
-
-const Tab: React.FC<{ tabName: string }> = ({ tabName }) => {
+const NewTab: React.FC<{ tabName: string, tabId: number, closeTab: any }> = ({ tabName, tabId, closeTab }) => {
   return (
     <TabContainer>
       <p>{tabName}</p>
-      <StyledCloseIcon />
+      <StyledCloseIcon onClick={() => closeTab(tabId)} />
     </TabContainer>
   );
 };
 
-const PlusTab: React.FC = () => {
+const PlusTab: React.FC<{ addTab: any }> = ({addTab}) => {
   return (
     <AddIconBox>
       <StyledAddIcon onClick={() => addTab() } />
@@ -60,24 +52,52 @@ const PlusTab: React.FC = () => {
   );
 };
 
-
-
-const Tabs: React.FC = () => {
-  const [tabs, setTabs] = useState(
-    JSON.parse(localStorage.getItem("tabs")) || []
+const AllTabs: React.FC = () => {
+  const [tabs, setTabs] = useState<Tabs>([])
+  const [currentTabId, setCurrentTabId] = React.useState(
+    (tabs[0] && tabs[0].id) || ""
   )
+  
+  const findCurrentTab = () => {
+    return tabs.find(tab => {
+        return tab.id === currentTabId
+    }) || tabs[0]
+  }
+
+  const addTab = () => {
+    let newTab: Tab = {
+      id: tabs.length === 0 ? tabs.length : tabs[tabs.length - 1].id + 1,
+      timetable: {}
+    }
+    setTabs(prevTabs => [...prevTabs, newTab])
+    setCurrentTabId(newTab.id)
+  }
+
+  const closeTab = (tabId: number) => {
+    setTabs(oldTabs => oldTabs.filter(oldTab => {return oldTab.id !== tabId}))
+  }
+
+  useEffect(() => {
+    let storedTabs = localStorage.getItem("tabs")
+    if (storedTabs !== null) {
+      setTabs(JSON.parse(storedTabs))
+    }
+  }, [])
+
   useEffect(() => {
     localStorage.setItem("tabs", JSON.stringify(tabs))
   }, [tabs])
 
 
   return (
-    <TabsBox>
-      <Tab tabName={'test'} />
-      <Tab tabName={'test'} />
-      <PlusTab />
-    </TabsBox>
+    <div>
+      <TabsBox>
+        {tabs.map(currTab => <NewTab tabName={"Timetable" + currTab.id} tabId={currTab.id} closeTab={closeTab} />)}
+        <PlusTab addTab={addTab} />
+      </TabsBox>
+      <Timetable currTab={findCurrentTab()} />
+    </div>
   )
 }
 
-export default Tabs;
+export default AllTabs;
