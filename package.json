@@ -9,7 +9,8 @@
     "dev": "yarn workspace frontend run dev"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "devDependencies": {
     "prettier": "^2.7.1",
