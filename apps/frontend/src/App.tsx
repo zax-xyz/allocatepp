@@ -15,7 +15,6 @@ const App = () => {
             type="button"
           >
             count is:
-            {' '}
             {count}
           </button>
         </p>
