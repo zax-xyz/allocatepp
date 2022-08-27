@@ -4,4 +4,4 @@ export type CourseEvent = google.Schema$Event;
 
 export type Course = string;
 
-export type TimeTable = Record<Course, CourseEvent[]>;
+export type Timetable = Record<Course, CourseEvent[]>;
