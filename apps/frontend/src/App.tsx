@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import TasksWidget from './components/Tasks';
 import Footer from './components/Footer';
 import Widgets from './components/Widgets';
+import Timetable from './components/Timetable';
 
 const StyledApp = styled(Box)`
   height: 100%;
@@ -55,7 +56,6 @@ const App: React.FC = () => {
   const theme = useTheme();
   const [darkMode, setDarkMode] = useState(false);
 
-  const [courses, setCourses] = useState<Course[]>([]);
   const [timetable, setTimetable] = useState(null);
 
   const globalStyle = {
@@ -93,6 +93,7 @@ const App: React.FC = () => {
               <Content>
                 <TimetableWrapper>
                   <TasksWidget />
+                  <Timetable />
                   <Widgets />
                 </TimetableWrapper>
               </Content>
