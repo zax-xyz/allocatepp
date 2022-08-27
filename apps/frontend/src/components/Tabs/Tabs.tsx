@@ -43,7 +43,7 @@ const StyledCloseIcon = styled(Close)`
 
 const NewTab: React.FC<{ tabName: string, tabId: number, closeTab: any, currentTabId: number, setCurrentTabId: any }> = ({ tabName, tabId, closeTab, currentTabId , setCurrentTabId}) => {
   return (
-    <TabContainer tabColour={tabId === currentTabId ? "#123456" : "#000000" } onClick={() => setCurrentTabId(tabId)} >
+    <TabContainer tabColour={tabId === currentTabId ? "#FFFFFF" : "#c5becd" } onClick={() => setCurrentTabId(tabId)} >
       <p>{tabName}</p>
       <StyledCloseIcon onClick={() => closeTab(tabId)} />
     </TabContainer>
