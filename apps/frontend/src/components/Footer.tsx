@@ -16,12 +16,12 @@ const Footer: React.FC = () => {
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: 'center',
             justifyContent: 'space-between',
-            py: 4,
+            py: 2,
           }}
         >
           <Typography color="text.secondary" variant="body2">
-            © {year} SYNCS Hack - Angella Pham, Grace Kan, Maxwell Phillips, Michael Vo, Mun Joon Teo
-            and Raiyan Ahmed
+            © {year} SYNCS Hack - Angella Pham, Grace Kan, Maxwell Phillips, Michael Vo, Mun Joon
+            Teo and Raiyan Ahmed
           </Typography>
           <Stack direction="row" spacing={3}>
             <Link

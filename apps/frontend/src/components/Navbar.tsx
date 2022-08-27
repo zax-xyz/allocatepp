@@ -5,6 +5,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { AppBar, IconButton, Toolbar, Typography, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { useContext } from 'react';
+import 'twin.macro';
 import { AppContext } from '../contexts/AppContext';
 import logo from '../assets/logo.png';
 
@@ -31,30 +32,30 @@ const LogoImg = styled('img')`
   height: 46px;
   margin-right: 12.5px;
   margin-top: -2px;
-  margin-left: -11.5px;
 `;
 
 interface Props {
   handleToggleDarkMode: () => void;
 }
 
-const Navbar: React.FC<Props> = ({ handleToggleDarkMode}) => {
-
+const Navbar: React.FC<Props> = ({ handleToggleDarkMode }) => {
   const theme = useTheme();
 
   return (
     <NavbarBox>
       <StyledNavBar>
         <Toolbar sx={{ gap: '10px' }}>
-          <LogoImg src={logo} sx={{ marginRight: '0px' }}/>
-          <NavbarTitle>ALLOCATE++</NavbarTitle>
-          <IconButton onClick={handleToggleDarkMode} color="inherit">
-            {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
-          {/* TODO: Notifications */}
-          {/* <IconButton onClick={() => setIsSendNotification(!isSendNotification)} color="inherit">
+          <div tw="mx-auto max-w-[100rem] flex flex-1 items-center">
+            <LogoImg src={logo} sx={{ marginRight: '0px' }} />
+            <NavbarTitle>ALLOCATE++</NavbarTitle>
+            <IconButton onClick={handleToggleDarkMode} color="inherit">
+              {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+            </IconButton>
+            {/* TODO: Notifications */}
+            {/* <IconButton onClick={() => setIsSendNotification(!isSendNotification)} color="inherit">
             {isSendNotification ? <NotificationsIcon /> : <NotificationsActiveIcon />}
           </IconButton> */}
+          </div>
         </Toolbar>
       </StyledNavBar>
     </NavbarBox>
