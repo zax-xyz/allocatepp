@@ -5,7 +5,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { AppBar, IconButton, Toolbar, Typography, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import React, { useContext } from 'react';
-import 'twin.macro';
+import tw, { styled as twinStyled } from 'twin.macro';
 import { AppContext } from '../contexts/AppContext';
 import logo from '../assets/logo.png';
 
@@ -16,11 +16,16 @@ const NavbarBox = styled('div')`
   z-index: 1201;
 `;
 
-const StyledNavBar = styled(AppBar)`
-  gap: 40px;
-  background: linear-gradient(220deg, #f0ddf5, #dde7f5);
-  z-index: 1201;
-`;
+const StyledNavBar = twinStyled(
+  styled(AppBar)`
+    gap: 40px;
+    background: linear-gradient(220deg, #f0ddf5, #dde7f5);
+    z-index: 1201;
+  `,
+  {
+    ...tw`shadow-md!`,
+  },
+);
 
 const NavbarTitle = styled(Typography)`
   flex-grow: 1;
