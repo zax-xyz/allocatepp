@@ -6,6 +6,14 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "apps/*"
-  ]
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.2"
+  },
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }

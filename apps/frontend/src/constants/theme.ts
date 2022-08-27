@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material';
 
 export const borderRadius = 10;
-export const inventoryMargin = 10; // Gap between inventory column and main timetable
+export const inventoryMargin = 10;
 
 export interface ThemeType {
   palette: {
@@ -55,7 +55,7 @@ const baseTheme = ({
   palette: {
     mode: mode,
     primary: {
-      main: '#f0ddf5',
+      main: '#bf7cff',
     },
     background: {
       default: background.main,
@@ -76,7 +76,7 @@ export const lightTheme = createTheme(
   baseTheme({
     mode: 'light',
     background: {
-      main: '#fafafa',
+      main: 'hsl(230, 25%, 96.1%)',
       light: '#ffffff',
       dark: '#f2f2f2',
     },
@@ -84,7 +84,7 @@ export const lightTheme = createTheme(
       main: '#bdbdbd',
       dark: '#999999',
     },
-  }),
+  })
 );
 
 export const darkTheme = createTheme(
@@ -99,5 +99,5 @@ export const darkTheme = createTheme(
       main: '#616161',
       dark: '#808080',
     },
-  }),
+  })
 );
