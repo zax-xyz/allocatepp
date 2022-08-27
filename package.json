@@ -7,5 +7,5 @@
   "private": true,
   "workspaces": [
     "apps/*"
-  ],
+  ]
 }
