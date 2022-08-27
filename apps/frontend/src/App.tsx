@@ -15,11 +15,9 @@ const App = () => {
           <p>
             <button
               tw="bg-white/20 hover:bg-white/25 transition-colors rounded px-2 py-1"
-              onClick={() => setCount(count + 1)}
               type="button"
             >
               count is:
-              {count}
             </button>
           </p>
         </header>
