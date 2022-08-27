@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { IconButton, Tooltip } from '@mui/material'
 import { Close, ClosedCaptionDisabled } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import AddIcon from '@mui/icons-material/Add';
@@ -46,7 +47,14 @@ const NewTab: React.FC<{ tabName: string, tabId: number, closeTab: any, currentT
   return (
     <TabContainer tabColour={tabId === currentTabId ? "#FFFFFF" : "#c5becd" } onClick={() => setCurrentTabId(tabId)} >
       <p>{tabName}</p>
-      <StyledCloseIcon onClick={() => closeTab(tabId)} />
+      <Tooltip title="Close tab">
+        <IconButton
+          color="inherit"
+          sx={{ width: '20px', height: '20px' }}
+        >
+          <StyledCloseIcon onClick={() => closeTab(tabId)} />
+        </IconButton>
+      </Tooltip>
     </TabContainer>
   );
 };
@@ -54,7 +62,14 @@ const NewTab: React.FC<{ tabName: string, tabId: number, closeTab: any, currentT
 const PlusTab: React.FC<{ addTab: any }> = ({addTab}) => {
   return (
     <AddIconBox>
-      <StyledAddIcon onClick={() => addTab() } />
+      <Tooltip title="New tab">
+        <IconButton
+          color="inherit"
+          sx={{ width: '30px', height: '30px' }}
+        >
+          <StyledAddIcon onClick={() => addTab()} />
+        </IconButton>
+      </Tooltip>
     </AddIconBox>
   );
 };

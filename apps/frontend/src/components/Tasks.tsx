@@ -3,7 +3,7 @@ import { styled } from '@mui/system';
 import { Button, Checkbox, Divider, IconButton, List, ListItem, ListItemIcon, Popover, TextField, Tooltip, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from '@mui/icons-material/Check';
 import { Add } from '@mui/icons-material';
 import { CreatedTasks, Task } from '../interfaces/types';
 import { AppContext } from '../contexts/AppContext';
@@ -207,7 +207,7 @@ const Tasks: React.FC = () => {
                   <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Task:</b> {task.description}</Typography>
                   <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Due date:</b> {task.dueDate.toLocaleDateString()}</Typography>
                 </TaskDetails>
-                <Tooltip title="Delete">
+                <Tooltip title="Mark task as done">
                   <IconButton
                     color="inherit"
                     sx={{ width: '30px', height: '30px' }}
