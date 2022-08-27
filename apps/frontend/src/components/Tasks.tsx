@@ -3,18 +3,24 @@ import { styled } from '@mui/system';
 import { Divider, IconButton, Popover, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import tw, { styled as twinStyled } from 'twin.macro';
 
-const TaskContainer = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border-radius: 15px;
-  background: ${({ theme }) => theme.palette.secondary.light};
-  border-color: black;
-  width: 350px;
-  min-height: 650px;
-  padding: 10px;
-`;
+const TaskContainer = twinStyled(
+  styled('div')`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 15px;
+    background: ${({ theme }) => theme.palette.secondary.light};
+    border-color: black;
+    width: 350px;
+    min-height: 650px;
+    padding: 10px;
+  `,
+  {
+    ...tw`shadow`,
+  },
+);
 
 const TaskTitle = styled(Typography)`
   font-weight: bolder;
@@ -22,9 +28,7 @@ const TaskTitle = styled(Typography)`
   margin-right: auto;
 `;
 
-
 const TasksWidget: React.FC = () => {
-
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
   const popoverId = open ? 'simple-popover' : undefined;
@@ -45,20 +49,18 @@ const TasksWidget: React.FC = () => {
           {open ? <CloseIcon /> : <AddIcon />}
         </IconButton>
         <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        
-      </Popover>
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+        ></Popover>
       </div>
       <Divider />
     </TaskContainer>
