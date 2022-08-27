@@ -21,14 +21,15 @@ const StyledApp = styled(Box)`
 const StyledBox = styled('div')`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 `;
 
 const ContentWrapper = twinStyled(
   styled(Box)`
+    flex: 1;
     text-align: center;
     padding-top: 64px;
     transition: background 0.2s, color 0.2s;
-    min-height: 50vh;
     box-sizing: border-box;
     display: flex;
     flex-direction: row-reverse;
@@ -44,9 +45,7 @@ const Content = styled(Box)`
   width: 2000px;
   max-width: 100%;
   transition: width 0.2s;
-  display: grid;
-  grid-template-rows: min-content min-content auto;
-  grid-template-columns: auto;
+  display: flex;
   text-align: center;
   padding: 25px;
 `;

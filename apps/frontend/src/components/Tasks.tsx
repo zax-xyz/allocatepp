@@ -14,7 +14,6 @@ const TaskContainer = twinStyled(
     background: ${({ theme }) => theme.palette.background.paper};
     border-color: black;
     width: 350px;
-    min-height: 650px;
     padding: 10px;
   `,
   {

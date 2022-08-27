@@ -13,7 +13,6 @@ const WidgetsContainer = twinStyled(
     background: ${({ theme }) => theme.palette.background.paper};
     border-color: black;
     width: 70px;
-    min-height: 650px;
     padding: 10px;
     margin-left: auto;
   `,
