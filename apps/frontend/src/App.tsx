@@ -6,6 +6,7 @@ import { lightTheme, darkTheme } from './constants/theme';
 import tw, { styled as twinStyled } from 'twin.macro';
 import { Course } from '../types/domain';
 import { TimetableProvider } from './hooks/useTimetable';
+import AppContextProvider from './contexts/AppContext';
 
 import Navbar from './components/Navbar';
 import Tasks from './components/Tasks';
@@ -64,25 +65,27 @@ const App: React.FC = () => {
   const [timetable, setTimetable] = useState(null);
 
   return (
-    <TimetableProvider value={timetable}>
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <GlobalStyles />
-        <StyledApp>
-          <StyledBox>
-            <Navbar handleToggleDarkMode={() => setDarkMode(!darkMode)} />
-            <ContentWrapper>
-              <Content>
-                <TimetableWrapper>
-                  <Tasks />
-                  <Widgets />
-                </TimetableWrapper>
-              </Content>
-            </ContentWrapper>
-            <Footer />
-          </StyledBox>
-        </StyledApp>
-      </ThemeProvider>
-    </TimetableProvider>
+    <AppContextProvider>
+      <TimetableProvider value={timetable}>
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+          <GlobalStyles />
+          <StyledApp>
+            <StyledBox>
+              <Navbar handleToggleDarkMode={() => setDarkMode(!darkMode)} />
+              <ContentWrapper>
+                <Content>
+                  <TimetableWrapper>
+                    <Tasks />
+                    <Widgets />
+                  </TimetableWrapper>
+                </Content>
+              </ContentWrapper>
+              <Footer />
+            </StyledBox>
+          </StyledApp>
+        </ThemeProvider>
+      </TimetableProvider>
+    </AppContextProvider>
   );
 };
 
