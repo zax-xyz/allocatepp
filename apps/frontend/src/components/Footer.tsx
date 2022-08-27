@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Box, Container, Divider, IconButton, Link, Stack, Typography } from '@mui/material';
-import { GitHub, LinkedIn } from '@mui/icons-material';
+import { GitHub } from '@mui/icons-material';
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
@@ -17,6 +17,7 @@ const Footer: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'space-between',
             py: 4,
+            height: '50px'
           }}
         >
           <Typography color="text.secondary" variant="body2">

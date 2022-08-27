@@ -6,7 +6,7 @@ import { lightTheme, darkTheme } from './constants/theme';
 import 'twin.macro';
 
 import Navbar from './components/Navbar';
-import TasksWidget from './components/Tasks';
+import Tasks from './components/Tasks';
 import Footer from './components/Footer';
 import Widgets from './components/Widgets';
 
@@ -33,7 +33,6 @@ const ContentWrapper = styled(Box)`
 
 const Content = styled(Box)`
   width: 2000px;
-  max-width: 100%;
   transition: width 0.2s;
   display: grid;
   grid-template-rows: min-content min-content auto;
@@ -52,7 +51,6 @@ const TimetableWrapper = styled(Box)`
 const App: React.FC = () => {
   const theme = useTheme();
   const [darkMode, setDarkMode] = useState(false);
-
 
   const globalStyle = {
     body: {
@@ -80,23 +78,23 @@ const App: React.FC = () => {
   
 
   return (
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <GlobalStyles styles={globalStyle} />
-        <StyledApp>
-          <StyledBox>
-            <Navbar handleToggleDarkMode={() => setDarkMode(!darkMode)} />
-            <ContentWrapper>
-              <Content>
-                <TimetableWrapper>
-                  <TasksWidget />
-                  <Widgets />
-                </TimetableWrapper>
-              </Content>
-            </ContentWrapper>
-            <Footer />
-          </StyledBox>
-        </StyledApp>
-      </ThemeProvider>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <GlobalStyles styles={globalStyle} />
+      <StyledApp>
+        <StyledBox>
+          <Navbar handleToggleDarkMode={() => setDarkMode(!darkMode)} />
+          <ContentWrapper>
+            <Content>
+              <TimetableWrapper>
+                <Tasks />
+                <Widgets />
+              </TimetableWrapper>
+            </Content>
+          </ContentWrapper>
+          <Footer />
+        </StyledBox>
+      </StyledApp>
+    </ThemeProvider>
   );
 };
 

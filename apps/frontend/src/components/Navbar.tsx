@@ -17,7 +17,7 @@ const NavbarBox = styled('div')`
 
 const StyledNavBar = styled(AppBar)`
   gap: 40px;
-  background: linear-gradient(220deg, #f0ddf5, #dde7f5);
+  background: ${({ theme }) => theme.palette.primary.main};
   z-index: 1201;
 `;
 
