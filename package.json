@@ -5,7 +5,14 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "yarn workspace frontend run dev"
+  },
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.2"
+  }
 }
