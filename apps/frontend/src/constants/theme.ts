@@ -76,7 +76,7 @@ export const lightTheme = createTheme(
   baseTheme({
     mode: 'light',
     background: {
-      main: '#fafafa',
+      main: 'hsl(230, 25%, 96.1%)',
       light: '#ffffff',
       dark: '#f2f2f2',
     },

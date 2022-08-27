@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { styled } from '@mui/system';
-import { Box, GlobalStyles, ThemeProvider, useTheme } from '@mui/material';
+import { Box, ThemeProvider, useTheme } from '@mui/material';
 
 import { lightTheme, darkTheme } from './constants/theme';
-import 'twin.macro';
+import tw, { styled as twinStyled } from 'twin.macro';
 import { Course } from '../types/domain';
 import { TimetableProvider } from './hooks/useTimetable';
 
@@ -12,6 +12,8 @@ import TasksWidget from './components/Tasks';
 import Footer from './components/Footer';
 import Widgets from './components/Widgets';
 
+import GlobalStyles from './GlobalStyles';
+
 const StyledApp = styled(Box)`
   height: 100%;
 `;
@@ -19,27 +21,31 @@ const StyledApp = styled(Box)`
 const StyledBox = styled('div')`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 `;
 
-const ContentWrapper = styled(Box)`
-  text-align: center;
-  padding-top: 64px;
-  transition: background 0.2s, color 0.2s;
-  min-height: 50vh;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  color: ${({ theme }) => theme.palette.text.primary};
-`;
+const ContentWrapper = twinStyled(
+  styled(Box)`
+    flex: 1;
+    text-align: center;
+    padding-top: 64px;
+    transition: background 0.2s, color 0.2s;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    color: ${({ theme }) => theme.palette.text.primary};
+  `,
+  {
+    ...tw`max-w-[100rem] w-full mx-auto`,
+  },
+);
 
 const Content = styled(Box)`
   width: 2000px;
   max-width: 100%;
   transition: width 0.2s;
-  display: grid;
-  grid-template-rows: min-content min-content auto;
-  grid-template-columns: auto;
+  display: flex;
   text-align: center;
   padding: 25px;
 `;
@@ -58,34 +64,10 @@ const App: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [timetable, setTimetable] = useState(null);
 
-  const globalStyle = {
-    body: {
-      background: theme.palette.background.default,
-      transition: 'background 0.2s',
-    },
-    '::-webkit-scrollbar': {
-      width: '10px',
-      height: '10px',
-    },
-    '::-webkit-scrollbar-track': {
-      background: theme.palette.background.default,
-      borderRadius: '5px',
-    },
-    '::-webkit-scrollbar-thumb': {
-      background: theme.palette.secondary.main,
-      borderRadius: '5px',
-      opacity: 0.5,
-      transition: 'background 0.2s',
-    },
-    '::-webkit-scrollbar-thumb:hover': {
-      background: theme.palette.secondary.dark,
-    },
-  };
-
   return (
     <TimetableProvider value={timetable}>
       <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <GlobalStyles styles={globalStyle} />
+        <GlobalStyles />
         <StyledApp>
           <StyledBox>
             <Navbar handleToggleDarkMode={() => setDarkMode(!darkMode)} />

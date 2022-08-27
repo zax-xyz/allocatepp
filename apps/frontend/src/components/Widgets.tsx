@@ -10,10 +10,9 @@ const WidgetsContainer = twinStyled(
     flex-direction: row;
     gap: 10px;
     border-radius: 15px;
-    background: ${({ theme }) => theme.palette.secondary.light};
+    background: ${({ theme }) => theme.palette.background.paper};
     border-color: black;
     width: 70px;
-    min-height: 650px;
     padding: 10px;
     margin-left: auto;
   `,
