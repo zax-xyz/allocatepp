@@ -2,7 +2,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import { AppBar, IconButton, Toolbar, Typography, useTheme } from '@mui/material';
+import { AppBar, IconButton, Toolbar, Tooltip, Typography, useTheme } from '@mui/material';
 import { styled } from '@mui/system';
 import React from 'react';
 import tw, { styled as twinStyled } from 'twin.macro';
@@ -53,9 +53,11 @@ const Navbar: React.FC<Props> = ({ handleToggleDarkMode }) => {
           <div tw="mx-auto max-w-[90rem] flex flex-1 items-center">
             <LogoImg src={logo} sx={{ marginRight: '0px' }} />
             <NavbarTitle>ALLOCATE++</NavbarTitle>
-            <IconButton onClick={handleToggleDarkMode} sx={{ color: '#212121' }}>
-              {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
-            </IconButton>
+            <Tooltip title="Change theme">
+              <IconButton onClick={handleToggleDarkMode} sx={{ color: '#212121' }}>
+                {theme.palette.mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
+              </IconButton>
+            </Tooltip>
             {/* <IconButton onClick={() => setIsSendNotification(!isSendNotification)} color="inherit">
               {isSendNotification ? <NotificationsIcon /> : <NotificationsActiveIcon />}
             </IconButton> */}

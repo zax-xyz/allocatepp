@@ -39,11 +39,6 @@ const TaskDiv = styled('div')`
   flex-direction: row;
 `;
 
-const DeleteDiv = styled('div')`
-  margin-left: auto; 
-  margin-right: 0;
-`;
-
 const StyledDeleteIcon = styled(DeleteIcon)`
   margin-left: 0;
 `;
