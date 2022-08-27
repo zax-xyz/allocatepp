@@ -15,7 +15,9 @@ type Theme = typeof config.theme;
 type ThemeMap = typeof config.themeMap;
 type Utils = typeof config.utils;
 
-type RemoveIndex<T> = {[k in keyof T as string extends k ? never : number extends k ? never : k]: T[k]}
+type RemoveIndex<T> = {
+  [k in keyof T as string extends k ? never : number extends k ? never : k]: T[k];
+};
 
 type Styled<Type> = {
   <
@@ -28,8 +30,7 @@ type Styled<Type> = {
     CSS = CSSUtil.CSS<Media, Theme, ThemeMap, Utils>,
   >(
     ...composers: {
-      [K in keyof Composers]: // Strings, React Components, and Functions can be skipped over
-      string extends Composers[K]
+      [K in keyof Composers]: string extends Composers[K] // Strings, React Components, and Functions can be skipped over
         ? Composers[K]
         : Composers[K] extends string | React.ComponentType<unknown> | Util.Function
         ? Composers[K]
@@ -103,7 +104,7 @@ declare module 'react' {
 // Support twins styled.div({}) syntax
 type StyledTags = {
   // eslint-disable-next-line no-undef
-  [Tag in keyof JSX.IntrinsicElements]: Styled<Tag>
+  [Tag in keyof JSX.IntrinsicElements]: Styled<Tag>;
 };
 
 declare module 'twin.macro' {
