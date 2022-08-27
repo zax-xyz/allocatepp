@@ -17,7 +17,7 @@ const TaskContainer = twinStyled(
     padding: 10px;
   `,
   {
-    ...tw`shadow-lg`,
+    ...tw`shadow-md`,
   },
 );
 
