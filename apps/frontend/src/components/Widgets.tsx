@@ -9,7 +9,6 @@ const WidgetsContainer = twinStyled(
     display: flex;
     flex-direction: row;
     gap: 10px;
-    border-radius: 15px;
     background: ${({ theme }) => theme.palette.background.paper};
     border-color: black;
     width: 70px;
@@ -17,7 +16,7 @@ const WidgetsContainer = twinStyled(
     margin-left: auto;
   `,
   {
-    ...tw`shadow`,
+    ...tw`shadow-md rounded-lg`,
   },
 );
 
