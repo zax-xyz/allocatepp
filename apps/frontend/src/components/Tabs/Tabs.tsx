@@ -33,6 +33,7 @@ const TabContainer = styled('div', {
   width: fit-content;
   height: fit-content;
   background-color: ${({ tabColour }) => tabColour};
+  colour: green;
 `;
 
 const StyledCloseIcon = styled(Close)`
@@ -41,9 +42,8 @@ const StyledCloseIcon = styled(Close)`
 `;
 
 const NewTab: React.FC<{ tabName: string, tabId: number, closeTab: any, currentTabId: number, setCurrentTabId: any }> = ({ tabName, tabId, closeTab, currentTabId , setCurrentTabId}) => {
-  console.log(currentTabId)
   return (
-    <TabContainer tabColour={tabId === currentTabId ? "#12345" : "#12345" } onClick={() => setCurrentTabId(tabId)} >
+    <TabContainer tabColour={tabId === currentTabId ? "#123456" : "#000000" } onClick={() => setCurrentTabId(tabId)} >
       <p>{tabName}</p>
       <StyledCloseIcon onClick={() => closeTab(tabId)} />
     </TabContainer>
@@ -98,7 +98,7 @@ const AllTabs: React.FC = () => {
   return (
     <div>
       <TabsBox>
-        {tabs.map(currTab => <NewTab tabName={"Timetable" + currTab.id} tabId={currTab.id} closeTab={closeTab} currentTabId={findCurrentTab().id} setCurrentTabId={setCurrentTabId} />)}
+        {tabs.map(currTab => <NewTab key={currTab.id} tabName={"Timetable" + currTab.id} tabId={currTab.id} closeTab={closeTab} currentTabId={findCurrentTab().id} setCurrentTabId={setCurrentTabId} />)}
         <PlusTab addTab={addTab} />
       </TabsBox>
       <Timetable currTab={findCurrentTab()} />
