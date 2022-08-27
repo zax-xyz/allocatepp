@@ -1,4 +1,3 @@
-
 import express, {Request, Response} from 'express';
 import mongoose from 'mongoose';
 
@@ -6,8 +5,8 @@ import mongoose from 'mongoose';
 const app = express();
 
 mongoose.connect('mongodb+srv://csesoc:syncs@cluster0.3ih5idr.mongodb.net/?retryWrites=true&w=majority'
-  ).then(result => {
-    app.listen(3000);
+  ).then(() => {
+    app.listen(3001);
     console.log("sussy things happening at port 3000");
   }).catch(err => console.log('err', err))
 
@@ -22,5 +21,6 @@ app.get("/course/:id", (req: Request, res: Response) => {
 })
 
 app.get("/courses/", (req: Request, res: Response) => { 
-  
+  const courses = mongoose.connection.db.listCollections().toArray((_, names) => names)
+  return res.send(courses);
 })
