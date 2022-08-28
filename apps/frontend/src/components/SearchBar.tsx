@@ -85,7 +85,7 @@ const SearchBar = () => {
               displayValue={(entry: Entry) => entry.course_code}
               onChange={event => setQuery(event.target.value)}
             />
-            <Combobox.Button tw="absolute inset-y-0 right-0 flex items-center pr-2">
+            <Combobox.Button tw="absolute inset-y-0 right-0 flex items-center pr-3">
               <ChevronUpDownIcon tw="h-5 w-5 text-gray-400" aria-hidden="true" />
             </Combobox.Button>
           </BarContainer>
