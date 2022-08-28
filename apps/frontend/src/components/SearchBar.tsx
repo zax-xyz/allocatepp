@@ -97,7 +97,7 @@ const SearchBar = () => {
             leaveTo={tw`opacity-0 translate-y-2`}
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options tw="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Combobox.Options tw="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {filtered.length === 0 && query !== '' ? (
                 <div tw="relative cursor-default select-none py-2 px-4 text-gray-700">
                   Nothing found.
