@@ -5,6 +5,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
 import algoliasearch from 'algoliasearch';
 
 import Transition from './Transition';
+import useTimetable from '../hooks/useTimetable';
 
 const client = algoliasearch('M25OTYMRZE', '172d90c7601fc57095c973e7941acd43');
 const index = client.initIndex('courses');
@@ -62,6 +63,8 @@ const SearchBar = () => {
   const [query, setQuery] = useState('');
   const [filtered, setFiltered] = useState<Entry[]>([]);
 
+  const timetable = useTimetable();
+
   useEffect(() => {
     const search = async () => {
       const { hits } = await index.search<Entry>(query);
@@ -71,6 +74,11 @@ const SearchBar = () => {
 
     search();
   }, [query]);
+
+  useEffect(() => {
+    if (!timetable) return;
+    timetable[selected.course_code] = [];
+  }, [selected]);
 
   return (
     <div tw="w-72 text-left">

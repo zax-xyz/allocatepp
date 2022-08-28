@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/system';
 import { Box, ThemeProvider, useTheme } from '@mui/material';
 
 import { lightTheme, darkTheme } from './constants/theme';
 import tw, { styled as twinStyled } from 'twin.macro';
-import { Course } from '../types/domain';
+import { Course, CourseEvent } from '../types/domain';
 import { TimetableProvider } from './hooks/useTimetable';
 
 import Navbar from './components/Navbar';
 import TasksWidget from './components/Tasks';
 import Footer from './components/Footer';
 import Widgets from './components/Widgets';
-import Timetable from './components/Timetable';
+import Timetable from './components/Timetable/index';
 
 import GlobalStyles from './GlobalStyles';
 
@@ -61,8 +61,16 @@ const TimetableWrapper = styled(Box)`
 const App: React.FC = () => {
   const theme = useTheme();
   const [darkMode, setDarkMode] = useState(false);
+  const [timetable, setTimetable] = useState<any | null>(null);
 
-  const [timetable, setTimetable] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('http://localhost:3001/course/COMP2022');
+      const data: any[] = await response.json();
+      setTimetable({ COMP2022: data });
+    };
+    fetchData();
+  }, []);
 
   return (
     <TimetableProvider value={timetable}>
