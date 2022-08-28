@@ -20,14 +20,13 @@ const TasksContainer = twinStyled(
     flex-direction: column;
     flex-shrink: 0;
     gap: 10px;
-    border-radius: 15px;
     background: ${({ theme }) => theme.palette.background.paper};
     border-color: black;
     width: 350px;
     padding: 10px;
   `,
   {
-    ...tw`shadow-md`,
+    ...tw`shadow-md rounded-lg`,
   },
 );
 
