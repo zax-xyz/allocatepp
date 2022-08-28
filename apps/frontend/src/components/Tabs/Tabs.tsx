@@ -41,7 +41,7 @@ const TabContainer = styled('div', {
   height: fit-content;
   border-radius: 5px 5px 0 0;
   background: ${({ active }) => (active
-    ? 'linear-gradient(220deg, hsl(287.4, 86.4%, 91.4%), hsl(214.7, 86.4%, 91.4%)) !important'
+    ? 'linear-gradient(290deg, hsl(257.4, 86.4%, 87%), hsl(214.7, 86.4%, 91.4%)) !important'
     : '#ffffff')};
   color: ${({ active }) => (active ? 'black' : theme`colors.gray.700`)};
   cursor: pointer;
