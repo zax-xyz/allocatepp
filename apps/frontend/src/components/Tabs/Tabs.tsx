@@ -4,7 +4,7 @@ import { IconButton, Tooltip } from '@mui/material';
 import { Close, ClosedCaptionDisabled } from '@mui/icons-material';
 import { styled } from '@mui/system';
 import AddIcon from '@mui/icons-material/Add';
-import { theme } from 'twin.macro';
+import tw, { theme } from 'twin.macro';
 import { Tab, Tabs } from '../../../types/domain';
 import Timetable from '../Timetable';
 
@@ -19,7 +19,10 @@ const StyledAddIcon = styled(AddIcon)`
 const TabsBox = styled('div')`
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
+`;
+
+const TabsContainer = tw.div`
+  flex overflow-x-auto
 `;
 
 const TabContainer = styled('div', {
@@ -119,16 +122,18 @@ const AllTabs: React.FC = () => {
   return (
     <div tw="flex flex-col overflow-x-hidden">
       <TabsBox>
-        {tabs.map(currTab => (
-          <NewTab
-            key={currTab.id}
-            tabName={`Timetable${currTab.id}`}
-            tabId={currTab.id}
-            closeTab={closeTab}
-            currentTabId={findCurrentTab().id}
-            setCurrentTabId={setCurrentTabId}
-          />
-        ))}
+        <TabsContainer>
+          {tabs.map(currTab => (
+            <NewTab
+              key={currTab.id}
+              tabName={`Timetable${currTab.id}`}
+              tabId={currTab.id}
+              closeTab={closeTab}
+              currentTabId={findCurrentTab().id}
+              setCurrentTabId={setCurrentTabId}
+            />
+          ))}
+        </TabsContainer>
         <PlusTab addTab={addTab} />
       </TabsBox>
       <Timetable currTab={findCurrentTab()} />
