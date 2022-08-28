@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from 'react';
 import tw, { styled } from 'twin.macro';
 import { Combobox } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/solid';
+import { CheckIcon, ChevronUpDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import algoliasearch from 'algoliasearch';
 
 import Transition from './Transition';
@@ -73,12 +73,15 @@ const SearchBar = () => {
   }, [query]);
 
   return (
-    <div tw="w-72 text-left">
+    <div tw="w-full text-left">
       <Combobox value={selected} onChange={setSelected}>
         <div tw="relative mt-1">
           <BarContainer>
+            <div tw="absolute inset-y-0 left-0 flex items-center pl-3">
+              <MagnifyingGlassIcon tw="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </div>
             <Combobox.Input
-              tw="w-full border-none py-2 pl-3 pr-10 leading-5 text-gray-900 focus:ring-0"
+              tw="w-full border-none py-3 pl-10 pr-10 leading-5 text-gray-900 focus:ring-0"
               displayValue={(entry: Entry) => entry.course_code}
               onChange={event => setQuery(event.target.value)}
             />

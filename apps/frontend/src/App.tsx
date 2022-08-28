@@ -13,6 +13,7 @@ import Tasks from './components/Tasks';
 import Footer from './components/Footer';
 import Widgets from './components/Widgets';
 import Tabs from './components/Tabs/Tabs';
+import SearchBar from './components/SearchBar';
 
 import GlobalStyles from './GlobalStyles';
 
@@ -34,8 +35,7 @@ const ContentWrapper = twinStyled(
     transition: background 0.2s, color 0.2s;
     box-sizing: border-box;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
+    justifyContent: center;
     color: ${({ theme }) => theme.palette.text.primary};
   `,
   {
@@ -47,11 +47,14 @@ const Content = styled(Box)`
   width: 100%;
   transition: width 0.2s;
   display: flex;
+  flex-direction: column;
+  gap: 15px;
   text-align: center;
   padding: 25px;
 `;
 
 const TimetableWrapper = styled(Box)`
+  flex: 1;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -75,6 +78,7 @@ const App: React.FC = () => {
               <Navbar handleToggleDarkMode={() => setDarkMode(!darkMode)} />
               <ContentWrapper>
                 <Content>
+                  <SearchBar />
                   <TimetableWrapper>
                     <Tasks />
                     <Tabs />
