@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { styled } from '@mui/system';
 import { Box, ThemeProvider, useTheme } from '@mui/material';
 
@@ -64,9 +64,16 @@ const TimetableWrapper = styled(Box)`
 const App: React.FC = () => {
   const theme = useTheme();
   const [darkMode, setDarkMode] = useState(false);
+  const [timetable, setTimetable] = useState<any | null>(null);
 
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [timetable, setTimetable] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('http://localhost:3001/course/COMP2022');
+      const data: any[] = await response.json();
+      setTimetable({ COMP2022: data });
+    };
+    fetchData();
+  }, []);
 
   return (
     <AppContextProvider>

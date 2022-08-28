@@ -1,7 +1,9 @@
 import express, { Request, Response } from 'express';
 import { connectToDB, db } from './db';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
 
 app.get('/course/:id', (req: Request, res: Response) => {
   const courseId = req.params.id;
@@ -18,5 +20,5 @@ app.get('/courses', (req: Request, res: Response) => {
 });
 
 connectToDB().then(() => {
-  app.listen(3003);
+  app.listen(3001);
 });
