@@ -10,6 +10,7 @@ const WidgetsContainer = twinStyled(
   styled('div')`
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     gap: 10px;
     border-radius: 15px;
     background: ${({ theme }) => theme.palette.background.paper};
@@ -23,42 +24,39 @@ const WidgetsContainer = twinStyled(
   },
 );
 
-const Widgets: React.FC = () => {
-  return (
-    <WidgetsContainer>
-      <Tooltip title="Contacts">
-        <IconButton
-          href="https://www.sydney.edu.au/contact-us.html"
-          target="_blank"
-          color="inherit"
-          sx={{ width: '50px', height: '50px' }}
-        >
-          <PermContactCalendarIcon />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Map">
-        <IconButton
-          href="https://maps.sydney.edu.au/"
-          target="_blank"
-          color="inherit"
-          sx={{ width: '50px', height: '50px' }}
-        >
-          <MapIcon />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title="Support services">
-        <IconButton
-          href="https://www.sydney.edu.au/study/why-choose-sydney/student-support.html"
-          target="_blank"
-          color="inherit"
-          sx={{ width: '50px', height: '50px' }}
-        >
-          <FavoriteIcon />
-        </IconButton>
-      </Tooltip>
-    </WidgetsContainer>
-  );
-};
+const Widgets: React.FC = () => (
+  <WidgetsContainer>
+    <Tooltip title="Contacts">
+      <IconButton
+        href="https://www.sydney.edu.au/contact-us.html"
+        target="_blank"
+        color="inherit"
+        sx={{ width: '50px', height: '50px' }}
+      >
+        <PermContactCalendarIcon />
+      </IconButton>
+    </Tooltip>
+    <Tooltip title="Map">
+      <IconButton
+        href="https://maps.sydney.edu.au/"
+        target="_blank"
+        color="inherit"
+        sx={{ width: '50px', height: '50px' }}
+      >
+        <MapIcon />
+      </IconButton>
+    </Tooltip>
+    <Tooltip title="Support services">
+      <IconButton
+        href="https://www.sydney.edu.au/study/why-choose-sydney/student-support.html"
+        target="_blank"
+        color="inherit"
+        sx={{ width: '50px', height: '50px' }}
+      >
+        <FavoriteIcon />
+      </IconButton>
+    </Tooltip>
+  </WidgetsContainer>
+);
 
 export default Widgets;
-

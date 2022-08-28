@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { styled } from '@mui/system';
 import { Box, ThemeProvider, useTheme } from '@mui/material';
 
-import { lightTheme, darkTheme } from './constants/theme';
 import tw, { styled as twinStyled } from 'twin.macro';
+import { lightTheme, darkTheme } from './constants/theme';
 import { Course } from '../types/domain';
 import { TimetableProvider } from './hooks/useTimetable';
 import AppContextProvider from './contexts/AppContext';
@@ -44,7 +44,7 @@ const ContentWrapper = twinStyled(
 );
 
 const Content = styled(Box)`
-  width: 2000px;
+  width: 100%;
   transition: width 0.2s;
   display: flex;
   text-align: center;

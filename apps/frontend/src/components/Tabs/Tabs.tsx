@@ -19,6 +19,7 @@ const StyledAddIcon = styled(AddIcon)`
 const TabsBox = styled('div')`
   display: flex;
   flex-direction: row;
+  overflow-x: auto;
 `;
 
 const TabContainer = styled('div', {
@@ -116,7 +117,7 @@ const AllTabs: React.FC = () => {
   }, [tabs]);
 
   return (
-    <div>
+    <div tw="flex flex-col overflow-x-hidden">
       <TabsBox>
         {tabs.map(currTab => (
           <NewTab

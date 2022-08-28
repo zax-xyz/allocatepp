@@ -1,21 +1,24 @@
 import React, { useContext, useState } from 'react';
 import { styled } from '@mui/system';
-import { Button, Checkbox, Divider, IconButton, List, ListItem, ListItemIcon, Popover, TextField, Tooltip, Typography } from '@mui/material';
+import {
+  Button, Checkbox, Divider, IconButton, List, ListItem, ListItemIcon, Popover, TextField, Tooltip, Typography,
+} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Check';
 import { Add } from '@mui/icons-material';
-import { CreatedTasks, Task } from '../interfaces/types';
-import { AppContext } from '../contexts/AppContext';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import tw, { styled as twinStyled } from 'twin.macro';
+import { AppContext } from '../contexts/AppContext';
+import { CreatedTasks, Task } from '../interfaces/types';
 
 const TasksContainer = twinStyled(
   styled('div')`
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     gap: 10px;
     border-radius: 15px;
     background: ${({ theme }) => theme.palette.background.paper};
@@ -64,7 +67,7 @@ const TaskWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 const TaskContainer = styled('div')`
   display: flex;
@@ -74,16 +77,15 @@ const TaskContainer = styled('div')`
   border-radius: 15px;
   padding: 19px;
   margin-top: 10px;
-`
+`;
 
 const TaskDetails = styled('div')`
   display: flex;
   flex-direction: column;
   width: 250px;
-`
+`;
 
 const Tasks: React.FC = () => {
-
   const { createdTasks, setCreatedTasks } = useContext(AppContext);
 
   const [courseCode, setCourseCode] = useState('');
@@ -103,17 +105,16 @@ const Tasks: React.FC = () => {
   };
 
   const deleteTask = (index: number) => {
-    setCreatedTasks((oldTasks: CreatedTasks): CreatedTasks => oldTasks.filter(oldTask => {return oldTask.index !== index}))
-  }
+    setCreatedTasks((oldTasks: CreatedTasks): CreatedTasks => oldTasks.filter(oldTask => oldTask.index !== index));
+  };
 
   const doCreateTask = () => {
-
     const newTask: Task = {
       index: createdTasks.length === 0 ? 0 : createdTasks[createdTasks.length - 1].index + 1,
       course: courseCode === '' ? 'N/A' : courseCode,
       description: taskDescription,
       dueDate: taskDate,
-    }
+    };
 
     setCreatedTasks([...createdTasks, newTask]);
 
@@ -122,7 +123,7 @@ const Tasks: React.FC = () => {
     setTaskDate(new Date());
 
     setAnchorEl(null);
-  }
+  };
 
   return (
     <TasksContainer>
@@ -132,93 +133,103 @@ const Tasks: React.FC = () => {
           {open ? <CloseIcon /> : <AddIcon />}
         </IconButton>
         <Popover
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <StyledList>
-          <StyledListItem>
-            <ListItemIcon>
-              <TextField
-                id="outlined-required"
-                label="Enter course code"
-                onChange={(e) => setCourseCode(e.target.value)}
-                variant="outlined"
-                fullWidth
-                defaultValue={courseCode}
-                inputProps={{ maxLength: 10 }}
-                sx={{ width: '234px', marginBottom: '15px' }}
-              />
-            </ListItemIcon>
-            <ListItemIcon>
-              <TextField
-                id="outlined-required"
-                label="Enter task description"
-                onChange={(e) => setTaskDescription(e.target.value)}
-                variant="outlined"
-                fullWidth
-                required
-                defaultValue={taskDescription}
-                inputProps={{ maxLength: 25 }}
-                sx={{ width: '234px' }}
-              />
-            </ListItemIcon>
-          </StyledListItem>
-          <StyledListItem>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>   
-              <DatePicker 
-                label="Select due date"
-                value={taskDate}
-                onChange={(newDate) => {
-                  if (newDate) setTaskDate(newDate)
-                }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-          </StyledListItem>
-        </StyledList>
-        <ExecuteButton
-          disableElevation
-          disabled={taskDescription === ''}
-          onClick={doCreateTask}
-          sx={{ marginBottom: '8px' }}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
         >
-          <Add sx={{ marginBottom: '3px', marginRight: '5px' }}/>
-          <Typography variant="body2">Add Task</Typography>
-        </ExecuteButton>
-      </Popover>
+          <StyledList>
+            <StyledListItem>
+              <ListItemIcon>
+                <TextField
+                  id="outlined-required"
+                  label="Enter course code"
+                  onChange={e => setCourseCode(e.target.value)}
+                  variant="outlined"
+                  fullWidth
+                  defaultValue={courseCode}
+                  inputProps={{ maxLength: 10 }}
+                  sx={{ width: '234px', marginBottom: '15px' }}
+                />
+              </ListItemIcon>
+              <ListItemIcon>
+                <TextField
+                  id="outlined-required"
+                  label="Enter task description"
+                  onChange={e => setTaskDescription(e.target.value)}
+                  variant="outlined"
+                  fullWidth
+                  required
+                  defaultValue={taskDescription}
+                  inputProps={{ maxLength: 25 }}
+                  sx={{ width: '234px' }}
+                />
+              </ListItemIcon>
+            </StyledListItem>
+            <StyledListItem>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Select due date"
+                  value={taskDate}
+                  onChange={newDate => {
+                    if (newDate) setTaskDate(newDate);
+                  }}
+                  renderInput={params => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            </StyledListItem>
+          </StyledList>
+          <ExecuteButton
+            disableElevation
+            disabled={taskDescription === ''}
+            onClick={doCreateTask}
+            sx={{ marginBottom: '8px' }}
+          >
+            <Add sx={{ marginBottom: '3px', marginRight: '5px' }} />
+            <Typography variant="body2">Add Task</Typography>
+          </ExecuteButton>
+        </Popover>
       </div>
       <Divider />
       <TaskWrapper>
-        { createdTasks.map((task: Task) => {
-          return (
-            <TaskContainer key={task.index}>
-              <TaskDiv>
-                <TaskDetails>
-                  <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Course:</b> {task.course}</Typography>
-                  <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Task:</b> {task.description}</Typography>
-                  <Typography variant='body1' sx={{ textAlign: 'left' }}><b>Due date:</b> {task.dueDate.toLocaleDateString()}</Typography>
-                </TaskDetails>
-                <Tooltip title="Mark task as done">
-                  <IconButton
-                    color="inherit"
-                    sx={{ width: '30px', height: '30px' }}
-                  >
-                    <StyledDeleteIcon onClick={() => deleteTask(task.index)} />
-                  </IconButton>
-                </Tooltip>
-              </TaskDiv>
-            </TaskContainer>
-          )
-        })}
+        { createdTasks.map((task: Task) => (
+          <TaskContainer key={task.index}>
+            <TaskDiv>
+              <TaskDetails>
+                <Typography variant="body1" sx={{ textAlign: 'left' }}>
+                  <b>Course:</b>
+                  {' '}
+                  {task.course}
+                </Typography>
+                <Typography variant="body1" sx={{ textAlign: 'left' }}>
+                  <b>Task:</b>
+                  {' '}
+                  {task.description}
+                </Typography>
+                <Typography variant="body1" sx={{ textAlign: 'left' }}>
+                  <b>Due date:</b>
+                  {' '}
+                  {task.dueDate.toLocaleDateString()}
+                </Typography>
+              </TaskDetails>
+              <Tooltip title="Mark task as done">
+                <IconButton
+                  color="inherit"
+                  sx={{ width: '30px', height: '30px' }}
+                >
+                  <StyledDeleteIcon onClick={() => deleteTask(task.index)} />
+                </IconButton>
+              </Tooltip>
+            </TaskDiv>
+          </TaskContainer>
+        ))}
       </TaskWrapper>
     </TasksContainer>
   );
