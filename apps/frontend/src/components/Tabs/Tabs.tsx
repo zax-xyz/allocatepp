@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { IconButton, Tooltip } from '@mui/material';
 import { Close, ClosedCaptionDisabled } from '@mui/icons-material';
@@ -95,6 +95,19 @@ const AllTabs: React.FC = () => {
 
   const findCurrentTab = () => tabs.find(tab => tab.id === currentTabId) || tabs[tabs.length - 1];
 
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+  const [scrollToEnd, setScrollToEnd] = useState(false);
+
+  useEffect(() => {
+    if (scrollToEnd) {
+      const elem = tabsContainerRef.current;
+      if (elem !== null) {
+        elem.scrollLeft = elem.scrollWidth;
+      }
+      setScrollToEnd(false);
+    }
+  }, [scrollToEnd]);
+
   const addTab = () => {
     const newTab: Tab = {
       id: tabs.length === 0 ? tabs.length : tabs[tabs.length - 1].id + 1,
@@ -102,6 +115,7 @@ const AllTabs: React.FC = () => {
     };
     setTabs(prevTabs => [...prevTabs, newTab]);
     setCurrentTabId(newTab.id);
+    setScrollToEnd(true);
   };
 
   const closeTab = (tabId: number) => {
@@ -122,7 +136,7 @@ const AllTabs: React.FC = () => {
   return (
     <div tw="flex flex-col overflow-x-hidden">
       <TabsBox>
-        <TabsContainer>
+        <TabsContainer ref={tabsContainerRef}>
           {tabs.map(currTab => (
             <NewTab
               key={currTab.id}
