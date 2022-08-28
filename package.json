@@ -5,9 +5,6 @@
   "main": "index.js",
   "license": "MIT",
   "private": true,
-  "scripts": {
-    "dev": "yarn workspace @allocatepp/app run dev"
-  },
   "workspaces": [
     "apps/*",
     "packages/*"

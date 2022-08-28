@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 import { styled } from '@mui/system';
 import { Box, ThemeProvider, useTheme } from '@mui/material';
 
-import { lightTheme, darkTheme } from './constants/theme';
 import tw, { styled as twinStyled } from 'twin.macro';
-import { Course, CourseEvent } from '../types/domain';
+import { lightTheme, darkTheme } from './constants/theme';
+import { Course } from '../types/domain';
 import { TimetableProvider } from './hooks/useTimetable';
+import AppContextProvider from './contexts/AppContext';
 
 import Navbar from './components/Navbar';
-import TasksWidget from './components/Tasks';
+import Tasks from './components/Tasks';
 import Footer from './components/Footer';
 import Widgets from './components/Widgets';
-import Timetable from './components/Timetable/index';
+import Tabs from './components/Tabs/Tabs';
+import SearchBar from './components/SearchBar';
 
 import GlobalStyles from './GlobalStyles';
 
@@ -33,25 +35,26 @@ const ContentWrapper = twinStyled(
     transition: background 0.2s, color 0.2s;
     box-sizing: border-box;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
+    justifyContent: center;
     color: ${({ theme }) => theme.palette.text.primary};
   `,
   {
-    ...tw`max-w-[90rem] w-full mx-auto`,
+    ...tw`max-w-[100rem] w-full mx-auto`,
   },
 );
 
 const Content = styled(Box)`
-  width: 2000px;
-  max-width: 100%;
+  width: 100%;
   transition: width 0.2s;
   display: flex;
+  flex-direction: column;
+  gap: 15px;
   text-align: center;
   padding: 25px;
 `;
 
 const TimetableWrapper = styled(Box)`
+  flex: 1;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -73,26 +76,29 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <TimetableProvider value={timetable}>
-      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-        <GlobalStyles />
-        <StyledApp>
-          <StyledBox>
-            <Navbar handleToggleDarkMode={() => setDarkMode(!darkMode)} />
-            <ContentWrapper>
-              <Content>
-                <TimetableWrapper>
-                  <TasksWidget />
-                  <Timetable />
-                  <Widgets />
-                </TimetableWrapper>
-              </Content>
-            </ContentWrapper>
-            <Footer />
-          </StyledBox>
-        </StyledApp>
-      </ThemeProvider>
-    </TimetableProvider>
+    <AppContextProvider>
+      <TimetableProvider value={timetable}>
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+          <GlobalStyles />
+          <StyledApp>
+            <StyledBox>
+              <Navbar handleToggleDarkMode={() => setDarkMode(!darkMode)} />
+              <ContentWrapper>
+                <Content>
+                  <SearchBar />
+                  <TimetableWrapper>
+                    <Tasks />
+                    <Tabs />
+                    <Widgets />
+                  </TimetableWrapper>
+                </Content>
+              </ContentWrapper>
+              <Footer />
+            </StyledBox>
+          </StyledApp>
+        </ThemeProvider>
+      </TimetableProvider>
+    </AppContextProvider>
   );
 };
 
