@@ -22,7 +22,7 @@ const TasksContainer = twinStyled(
     gap: 10px;
     background: ${({ theme }) => theme.palette.background.paper};
     border-color: black;
-    width: 350px;
+    width: 300px;
     padding: 10px;
   `,
   {
@@ -37,6 +37,7 @@ const TaskTitle = styled(Typography)`
 `;
 
 const TaskDiv = styled('div')`
+  flex: 1;
   display: flex;
   flex-direction: row;
 `;
@@ -63,12 +64,14 @@ const ExecuteButton = styled(Button)`
 `;
 
 const TaskWrapper = styled('div')`
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
 const TaskContainer = styled('div')`
+  flex: 1;
   display: flex;
   flex-direction: row;
   width: 95%;
@@ -81,7 +84,7 @@ const TaskContainer = styled('div')`
 const TaskDetails = styled('div')`
   display: flex;
   flex-direction: column;
-  width: 250px;
+  flex: 1;
 `;
 
 const Tasks: React.FC = () => {

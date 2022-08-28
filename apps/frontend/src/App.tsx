@@ -39,7 +39,7 @@ const ContentWrapper = twinStyled(
     color: ${({ theme }) => theme.palette.text.primary};
   `,
   {
-    ...tw`max-w-[92rem] w-full mx-auto`,
+    ...tw`max-w-[100rem] w-full mx-auto`,
   },
 );
 
